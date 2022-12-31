@@ -46,12 +46,15 @@ const register = async (req, res)=>{
     token: generaToken(newUser._id)
    })
 
+}
 
 
-
+const login = (req, res) => {
+  res.send("login")
 }
 
 module.exports = {
   register,
+  login,
   generaToken
 }

@@ -49,8 +49,27 @@ const register = async (req, res)=>{
 }
 
 
-const login = (req, res) => {
-  res.send("login")
+const login = async(req, res) => {
+  const {email, password} = req.body
+
+ const user = await User.findOne({email: email}) 
+ if(!user){
+  res.status(404).json({errors: ["usuario não encontrado."]})
+  return 
+ }
+
+ //check senhas 
+ if(!(await bcrypt.compare(password, user.password))){
+  res.status(422).json({errors: ["Senha ou email incorreta."]})
+  return 
+ }
+ res.status(201).json({
+  _id: user._id, 
+  profileImage: user.profileImage,
+  token: generaToken(user._id)
+ })
+
+
 }
 
 module.exports = {

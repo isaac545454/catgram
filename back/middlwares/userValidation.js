@@ -45,6 +45,20 @@ const loginValidation = ()=>{
 }
 
 
+const userUpdate = ()=>{
+  return[
+    body('name')
+    .optional()
+    .isLength({min: 3})
+    .withMessage("o nome precida de pelo menos tres letras"),
+    body('password')
+    .optional()
+    .isLength({min:5})
+    .withMessage("a senha precisa de pelo menos tres letras")
+
+  ]
+}
 
 
-module.exports = {userCreateValidation, loginValidation}
+
+module.exports = {userCreateValidation, loginValidation, userUpdate}

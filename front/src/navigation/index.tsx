@@ -16,11 +16,13 @@ function RoutesDestination() {
     <div className="App">
       <BrowserRouter>
         <Navbar />
-        <Routes>
-          <Route path={ROUTES.home} element={<Home />} />
-          <Route path={ROUTES.login} element={<Login />} />
-          <Route path={ROUTES.register} element={<Register />} />
-        </Routes>
+        <div className="min-h-[70vh]">
+          <Routes>
+            <Route path={ROUTES.home} element={<Home />} />
+            <Route path={ROUTES.login} element={<Login />} />
+            <Route path={ROUTES.register} element={<Register />} />
+          </Routes>
+        </div>
         <Footer />
       </BrowserRouter>
     </div>

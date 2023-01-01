@@ -7,6 +7,7 @@ import {
   BsFillPersonFill,
   BsFillCameraFill,
 } from "react-icons/bs";
+import { ROUTES } from "../../navigation/ROUTES";
 
 export default function Navbar() {
   return (
@@ -22,17 +23,17 @@ export default function Navbar() {
       </form>
       <ul className="flex items-center">
         <li className="mr-4">
-          <NavLink to="/" className="cursor-pointer ">
+          <NavLink to={ROUTES.home} className="cursor-pointer ">
             <BsHouseDoorFill size={28} />
           </NavLink>
         </li>
         <li className="mr-4">
-          <NavLink to="/login" className="cursor-pointer ">
+          <NavLink to={ROUTES.login} className="cursor-pointer ">
             ENTRAR
           </NavLink>
         </li>
         <li className="mr-4">
-          <NavLink to="/register" className="cursor-pointer ">
+          <NavLink to={ROUTES.register} className="cursor-pointer ">
             CADASTRAR
           </NavLink>
         </li>

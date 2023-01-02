@@ -14,7 +14,7 @@ export default function Navbar() {
     <div className="flex justify-between items-center bg-black border-b border-b-[#363636] px-4 py-6">
       <Link to="/">Catgram</Link>
       <form className="flex items-center relative w-[20%]">
-        <BsSearch className="absolute top-1 right-2" color="#000" />
+        <BsSearch className="absolute top-3 left-2 " color="#000" />
         <input
           type="text"
           placeholder="Pesquisar"

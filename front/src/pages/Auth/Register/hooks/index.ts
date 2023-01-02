@@ -1,10 +1,10 @@
-import { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
 
 export function useRister() {
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    alert("a");
+  const handleSubmit = (data: any) => {
+    console.log(data);
   };
+
   return {
     handleSubmit,
   };

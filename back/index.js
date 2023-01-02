@@ -8,6 +8,7 @@ const app = express()
 const router = require("./routes/router")
 //config JSON and form data 
 app.use(express.json())
+app.use(cors())
 app.use(express.urlencoded({extended: false}))
 //acesso do front
 app.use(cors({credentials: true, origin: 'http://locahost:3000'}))

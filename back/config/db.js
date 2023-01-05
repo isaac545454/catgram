@@ -1,21 +1,21 @@
-const mongoose = require("mongoose")
-//mongodb+srv://isaac:<password>@cluster0.hjhia.mongodb.net/?retryWrites=true&w=majority
-//mongodb+srv://isaac:<password>@cluster0.hjhia.mongodb.net/?retryWrites=true&w=majority
+const mongoose = require("mongoose");
+const dbUser = process.env.USER;
+const dbPassword = process.env.PASSWORD;
 
-const dbUser = process.env.USER
-const dbPassword = process.env.PASSWORD
-
-const conn = async()=>{
+const conn = async () => {
   try {
-    const dbConn = await 
-    mongoose.connect(`mongodb+srv://${dbUser}:${dbPassword}@cluster0.p2x8fjn.mongodb.net/?retryWrites=true&w=majority`)
-     console.log("conectado ao banco");
-     return dbConn
+    const dbConn = await mongoose.connect(
+      `mongodb+srv://${dbUser}:${dbPassword}@cluster0.p2x8fjn.mongodb.net/?retryWrites=true&w=majority`
+    );
+    console.log("Conectou ao banco de dados!", dbUser, dbPassword);
+
+    return dbConn;
   } catch (error) {
     console.log(error);
   }
-}
-conn()
+};
 
+conn();
 
-module.exports = conn
+module.exports = conn;
+// mongodb+srv://isaac:<password>@cluster0.p2x8fjn.mongodb.net/?retryWrites=true&w=majority

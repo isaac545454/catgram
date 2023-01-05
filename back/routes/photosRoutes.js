@@ -1,25 +1,27 @@
-const express = require('express') 
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-//comtroller 
+//comtroller
 
-const {insertPhoto} = require('../controllers/photosControlle')
+const { insertPhoto, deletePhoto } = require("../controllers/photosControlle");
 
-//middleware 
+//middleware
 
-const { photoInsertValidation } = require('../middlwares/photoValidation')
-const authGuard = require('../middlwares/authGuard')
-const validate = require('../middlwares/handleValidation')
-const {imageUpload} = require('../middlwares/imageUpload')
+const { photoInsertValidation } = require("../middlwares/photoValidation");
+const authGuard = require("../middlwares/authGuard");
+const validate = require("../middlwares/handleValidation");
+const { imageUpload } = require("../middlwares/imageUpload");
 
-//routes 
+//routes
 router.post(
-    "/", 
-    authGuard, 
-    imageUpload.single("image"), 
-    photoInsertValidation(), 
-    validate, 
-    insertPhoto 
-)
+  "/",
+  authGuard,
+  imageUpload.single("image"),
+  photoInsertValidation(),
+  validate,
+  insertPhoto
+);
 
-module.exports = router
+router.delete("/:id", authGuard, deletePhoto);
+
+module.exports = router;

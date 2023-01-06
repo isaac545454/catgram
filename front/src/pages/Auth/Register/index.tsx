@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { BiRotateRight } from "react-icons/bi";
 
 //hooks
 import { useState, useEffect } from "react";
@@ -11,7 +12,7 @@ import schema from "./yup/index";
 import Input from "../../../components/Input";
 
 export default function Register() {
-  const { handleSubmit } = useRister();
+  const { handleSubmit, RegisterPost } = useRister();
   const methods = useForm({ resolver: yupResolver(schema) });
 
   return (
@@ -47,7 +48,13 @@ export default function Register() {
           validationName="confirmPassword"
           methods={methods}
         />
-        <button>Cadastrar</button>
+        <button className="flex justify-center items-center">
+          {RegisterPost.isLoading ? (
+            <BiRotateRight className="animate-spin " color="#fff" size={30} />
+          ) : (
+            <p>CADASTRAR</p>
+          )}
+        </button>
         <div className="border-b-2 border-b-[#363636] p-3"></div>
         <p className="text-center mt-4 cursor-pointer">
           ja passui uma conta? <Link to={ROUTES.login}> click aqui</Link>

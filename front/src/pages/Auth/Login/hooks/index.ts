@@ -10,8 +10,9 @@ export function useLogin() {
   const loginPost = useMutation<LoginRes, AxiosError<any>, LoginReq>(
     (data) => loginHttp(data.email, data.password),
     {
-      onSuccess: () => {
+      onSuccess: (response) => {
         toast.success("login realizado com sucesso!");
+        localStorage.setItem("user", JSON.stringify(response));
       },
       onError: (erro) => {
         toast.error("login inválido");
@@ -31,5 +32,6 @@ export function useLogin() {
 
   return {
     handleSubmit,
+    loginPost,
   };
 }

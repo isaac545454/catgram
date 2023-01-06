@@ -10,8 +10,9 @@ export function useRister() {
   const RegisterPost = useMutation<Response, AxiosError<any>, Request>(
     (data) => RegisterLoginPost(data),
     {
-      onSuccess: () => {
+      onSuccess: (response) => {
         toast.success("cadastro realizado com sucesso!");
+        localStorage.setItem("user", JSON.stringify(response));
       },
       onError: (erro) => {
         toast.error(erro.response?.data.errors[0]);
@@ -29,5 +30,6 @@ export function useRister() {
 
   return {
     handleSubmit,
+    RegisterPost,
   };
 }

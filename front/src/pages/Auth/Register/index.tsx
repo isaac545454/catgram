@@ -44,7 +44,7 @@ export default function Register() {
         <Input
           placeholder="confirme sua senha "
           errors={methods.formState.errors}
-          validationName="confirmePassword"
+          validationName="confirmPassword"
           methods={methods}
         />
         <button>Cadastrar</button>

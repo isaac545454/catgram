@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //acesso do front
-app.use(cors({ credentials: true, origin: "http://locahost:3000" }));
+app.use(cors());
 
 //caminho das imagens
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));

@@ -10,7 +10,7 @@ const schema = yup.object().shape({
     .string()
     .min(6, "a senha de pelo menos seis caracteres")
     .required("a senha é obrigatório"),
-  confirmePassword: yup
+  confirmPassword: yup
     .string()
     .min(6)
     .required("a confirmação da senha é obrigatório"),

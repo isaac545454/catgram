@@ -4,8 +4,12 @@ import { toast } from "react-toastify";
 import { LoginReq, LoginRes } from "../../../../@types/Login";
 import { login } from "../../../../services/http/login";
 import { login as loginHttp } from "../../../../services/http/login";
+import { AuthContext } from "../../../../context/index";
+import { useContext } from "react";
+import axios from "axios";
 
 export function useLogin() {
+  const { setAuth } = useContext(AuthContext);
   //use mutage para o post do login
   const loginPost = useMutation<LoginRes, AxiosError<any>, LoginReq>(
     (data) => loginHttp(data.email, data.password),
@@ -13,6 +17,8 @@ export function useLogin() {
       onSuccess: (response) => {
         toast.success("login realizado com sucesso!");
         localStorage.setItem("user", JSON.stringify(response));
+        setAuth(response.id);
+        axios.defaults.headers["Authorization"] = `Bearer ${response.token}`;
       },
       onError: (erro) => {
         toast.error("login inválido");

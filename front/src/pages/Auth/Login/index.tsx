@@ -8,6 +8,7 @@ import { ROUTES } from "../../../navigation/ROUTES";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schema from "./yup/index";
+import { AuthContext } from "../../../context/index";
 
 import Input from "../../../components/Input";
 

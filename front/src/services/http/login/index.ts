@@ -1,6 +1,6 @@
 import axios from "axios";
-import { ENDEPOINTS } from "../ENDIPOINTS";
-import { api } from "../../utils/config";
+import { ENDEPOINTS } from "../../ENDIPOINTS";
+import { api } from "../../../utils/config";
 
 const url = api + ENDEPOINTS.login;
 

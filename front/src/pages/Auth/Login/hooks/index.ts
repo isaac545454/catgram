@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { LoginReq, LoginRes } from "../../../../@types/Login";
 import { login } from "../../../../services/http/login";
 import { login as loginHttp } from "../../../../services/http/login";
-import { AuthContext } from "../../../../context/index";
+import { AuthContext, Auth } from "../../../../context/index";
 import { useContext } from "react";
 import axios from "axios";
 
@@ -17,7 +17,7 @@ export function useLogin() {
       onSuccess: (response) => {
         toast.success("login realizado com sucesso!");
         localStorage.setItem("user", JSON.stringify(response));
-        setAuth(response.id);
+        setAuth(response as Auth);
         axios.defaults.headers["Authorization"] = `Bearer ${response.token}`;
       },
       onError: (erro) => {

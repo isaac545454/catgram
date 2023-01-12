@@ -2,13 +2,12 @@ import { Link } from "react-router-dom";
 import { BiRotateRight } from "react-icons/bi";
 
 //hooks
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useLogin } from "./hooks";
 import { ROUTES } from "../../../navigation/ROUTES";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schema from "./yup/index";
-import { AuthContext } from "../../../context/index";
 
 import Input from "../../../components/Input";
 

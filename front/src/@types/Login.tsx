@@ -4,6 +4,6 @@ export interface LoginReq {
 }
 export interface LoginRes {
   token: string;
-  id: string;
+  _id: string;
   profileImage?: string;
 }

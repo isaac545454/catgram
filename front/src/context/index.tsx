@@ -6,18 +6,15 @@ interface Props {
   children: ReactNode;
 }
 
-interface Token {
-  id?: string;
-  token?: string;
-}
-
 interface Value {
   setAuth: React.Dispatch<React.SetStateAction<Auth | null>>;
   auth: Auth | null;
+  clearUser: () => void;
 }
 export interface Auth {
-  id: string;
+  _id: string;
   token: string;
+  profileImage?: string;
 }
 
 export const AuthContext = createContext({} as Value);
@@ -33,8 +30,14 @@ export function AuthProvider({ children }: Props) {
     }
   }, []);
 
+  const clearUser = () => {
+    setAuth(null);
+    axios.defaults.headers["Authorization"] = ``;
+    localStorage.clear();
+  };
+
   return (
-    <AuthContext.Provider value={{ setAuth, auth }}>
+    <AuthContext.Provider value={{ setAuth, auth, clearUser }}>
       {children}
     </AuthContext.Provider>
   );

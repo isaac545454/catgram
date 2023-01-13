@@ -12,6 +12,7 @@ import { AuthContext } from "../context/index";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Auth/Login/index";
 import Register from "../pages/Auth/Register/index";
+import Profile from "../pages/EditPhofile";
 
 //components
 import Navbar from "../components/Navbar";
@@ -31,11 +32,21 @@ function RoutesDestination() {
         <Navbar />
         <div className="min-h-[70vh]">
           <Routes>
-            <Route path={ROUTES.home} element={auth ? <Home /> : <Login />} />
-            <Route path={ROUTES.login} element={!auth ? <Login /> : <Home />} />
+            <Route
+              path={ROUTES.home}
+              element={auth ? <Home /> : <Navigate to={ROUTES.login} />}
+            />
+            <Route
+              path={ROUTES.login}
+              element={!auth ? <Login /> : <Navigate to={ROUTES.login} />}
+            />
             <Route
               path={ROUTES.register}
-              element={!auth ? <Register /> : <Home />}
+              element={!auth ? <Register /> : <Navigate to={ROUTES.home} />}
+            />
+            <Route
+              path={ROUTES.profile}
+              element={auth ? <Profile /> : <Navigate to={ROUTES.login} />}
             />
           </Routes>
         </div>

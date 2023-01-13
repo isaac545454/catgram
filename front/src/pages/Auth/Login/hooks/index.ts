@@ -2,7 +2,6 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { LoginReq, LoginRes } from "../../../../@types/Login";
-import { login } from "../../../../services/http/login";
 import { login as loginHttp } from "../../../../services/http/login";
 import { AuthContext, Auth } from "../../../../context/index";
 import { useContext } from "react";

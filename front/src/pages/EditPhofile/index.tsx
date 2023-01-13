@@ -1,14 +1,19 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { FormEvent } from "react";
+import { useData } from "./hooks/index";
+import { useQuery } from "@tanstack/react-query";
+import { GetProfile } from "../../services/http/profile/getData";
 
 export default function index() {
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-  };
+  const data = useData();
+  const { data: dataProfile } = useQuery(["profile"], GetProfile);
+  console.log(dataProfile);
+
   return (
-    <div>
-      <h2 className="">Edit os dados do seu PET</h2>
+    <div className="border borderr-[#363636] bg-black px-8 py-6 mx-auto my-4 max-w-[40%] text-center">
+      <h2 className=" ">Edit os dados do seu PET</h2>
       <p className="">Adicione uma Imagem de Perfil para o seu PET</p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={data.handleSubmit}>
         <input type="text" placeholder="Nome" />
         <input type="email" placeholder="E-mail" disabled />
         <label>

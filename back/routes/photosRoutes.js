@@ -38,10 +38,10 @@ router.post(
 );
 router.get("/search", authGuard, searchPhotos);
 router.get("/", authGuard, getAllPhotos);
-router.get("/user/:id", authGuard, getUser);
-router.delete("/:id", authGuard, deletePhoto);
 router.get("/:id", authGuard, getPhotosById);
 router.put("/:id", authGuard, photoUpdateValidation(), validate, updatePhotos);
+router.get("/user/:id", authGuard, getUser);
+router.delete("/:id", authGuard, deletePhoto);
 router.put("/like/:id", authGuard, likePhoto);
 router.put(
   "/comment/:id",

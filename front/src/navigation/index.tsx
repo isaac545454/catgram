@@ -22,10 +22,18 @@ import Footer from "../components/Footer";
 import { ROUTES } from "./ROUTES";
 
 function RoutesDestination() {
-  const { auth } = useContext(AuthContext);
+  const { auth, isLoading } = useContext(AuthContext);
   // useEffect(() => {
 
   // }, []);
+  if (isLoading) {
+    return (
+      <div>
+        <p>carregando</p>
+      </div>
+    );
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -34,19 +42,35 @@ function RoutesDestination() {
           <Routes>
             <Route
               path={ROUTES.home}
-              element={auth ? <Home /> : <Navigate to={ROUTES.login} />}
+              element={
+                !auth && !isLoading ? <Navigate to={ROUTES.login} /> : <Home />
+              }
             />
             <Route
               path={ROUTES.login}
-              element={!auth ? <Login /> : <Navigate to={ROUTES.login} />}
+              element={
+                !auth && !isLoading ? <Login /> : <Navigate to={ROUTES.login} />
+              }
             />
             <Route
               path={ROUTES.register}
-              element={!auth ? <Register /> : <Navigate to={ROUTES.home} />}
+              element={
+                !auth && !isLoading ? (
+                  <Register />
+                ) : (
+                  <Navigate to={ROUTES.home} />
+                )
+              }
             />
             <Route
               path={ROUTES.profile}
-              element={auth ? <Profile /> : <Navigate to={ROUTES.login} />}
+              element={
+                !auth && !isLoading ? (
+                  <Navigate to={ROUTES.login} />
+                ) : (
+                  <Profile />
+                )
+              }
             />
           </Routes>
         </div>

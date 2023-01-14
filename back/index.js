@@ -15,7 +15,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 //caminho das imagens
-app.use("/uploads", express.static(path.join(__dirname, "./uploads")));
+app.use("/uploads", express.static(path.resolve(__dirname, "./uploads")));
+app.use(
+  "/uploads/users",
+  express.static(path.resolve(__dirname, "./uploads/Users/"))
+);
+app.use(
+  "/uploads/photos",
+  express.static(path.resolve(__dirname, "./uploads"))
+);
 
 //DB conexão
 require("./config/db");

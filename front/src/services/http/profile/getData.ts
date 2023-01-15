@@ -8,8 +8,5 @@ const urlPhoto = uploads + ENDEPOINTS.photos;
 
 export const GetProfile = async (): Promise<resProfile> => {
   const res = await axios.get<resProfile>(url);
-  // const resPhoto = await axios.get(`http://localhost:3333/api/photos/`);
-  // console.log(resPhoto);
-
   return res.data;
 };

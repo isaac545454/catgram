@@ -39,6 +39,7 @@ export const useData = () => {
       profileImage: file ? file : "",
     };
     putProfile.mutate(req);
+    console.log(req);
   };
 
   //função da imagem aparecer na tela

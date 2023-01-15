@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Schema } from "./yup/index";
 import { toast } from "react-toastify";
 import { Datas } from "./typesLocal/index";
+import { UserUploads } from "../../utils/config";
 
 export default function index() {
   const data: Datas = useData();
@@ -18,12 +19,8 @@ export default function index() {
       methods.setValue("name", res.name);
       methods.setValue("bio", res.bio);
 
-      console.log(res);
       if (res.profileImage) {
-        const file = new File(["profileImage"], String(res.profileImage));
-        const url = URL.createObjectURL(file);
-
-        data.setImage(url);
+        data.setImage(UserUploads + res.profileImage);
       }
     },
     onError: (err) => {
@@ -87,7 +84,7 @@ export default function index() {
         <label>
           <span>Quer alterar sua senha?</span>
           <Input
-            type="password"
+            type="text"
             placeholder="Digite sua nova senha"
             methods={methods}
             validationName="password"

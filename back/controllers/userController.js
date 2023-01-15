@@ -78,11 +78,17 @@ const getCurrentUser = async (req, res) => {
 
 const update = async (req, res) => {
   const { name, password, bio } = req.body;
+  const data = req.body;
+  console.log(data);
+
   let profileImage = null;
+
   if (req.file) {
     profileImage = req.file.filename;
   }
+
   const reqUser = req.user;
+
   const user = await User.findById(mongoose.Types.ObjectId(reqUser._id)).select(
     "-password"
   );
@@ -90,14 +96,17 @@ const update = async (req, res) => {
   if (name) {
     user.name = name;
   }
+
   if (password) {
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
     user.password = passwordHash;
   }
+
   if (profileImage) {
     user.profileImage = profileImage;
   }
+
   if (bio) {
     user.bio = bio;
   }

@@ -4,7 +4,6 @@ import { ENDEPOINTS } from "../../ENDIPOINTS";
 import { resProfile } from "./typesLocal/index";
 
 const url = api + ENDEPOINTS.profile;
-const urlPhoto = uploads + ENDEPOINTS.photos;
 
 export const GetProfile = async (): Promise<resProfile> => {
   const res = await axios.get<resProfile>(url);

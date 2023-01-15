@@ -23,11 +23,9 @@ export const useData = () => {
       onSuccess: (response) => {
         queryClient.invalidateQueries(["profile"]);
         toast.success("perfil atualizado com sucesso!");
-        console.log(response);
       },
       onError: (error) => {
         toast.error("Ops... houve um erro");
-        console.log(error);
       },
     }
   );

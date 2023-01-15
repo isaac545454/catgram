@@ -8,5 +8,8 @@ export const Schema = yup.object({
     .required("Campo obrigatorio"),
   filePhofile: yup.string(),
   bio: yup.string().required("campo obrigatorio"),
-  password: yup.string(),
+  password: yup
+    .string()
+    .min(6, "digite uma nova senha ou sua antiga")
+    .required(),
 });

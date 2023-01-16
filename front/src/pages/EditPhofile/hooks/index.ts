@@ -6,7 +6,7 @@ import {
 import { AxiosError } from "axios";
 import { ChangeEvent, useState } from "react";
 import { toast } from "react-toastify";
-import { updatePhofile } from "../../../services/http/profile/updateData";
+import { updatePhofile } from "../../../services/http/editProfile/updateData";
 import { Data } from "../typesLocal/index";
 
 export const useData = () => {

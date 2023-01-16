@@ -2,7 +2,7 @@
 import React, { ChangeEvent, Dispatch, useState } from "react";
 import { useData } from "./hooks/index";
 import { useQuery } from "@tanstack/react-query";
-import { GetProfile } from "../../services/http/profile/getData";
+import { GetProfile } from "../../services/http/editProfile/getData";
 import Input from "../../components/Input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";

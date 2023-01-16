@@ -12,7 +12,8 @@ import { AuthContext } from "../context/index";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Auth/Login/index";
 import Register from "../pages/Auth/Register/index";
-import Profile from "../pages/EditPhofile";
+import EditProfile from "../pages/EditPhofile";
+import Phofire from "../pages/Profile";
 
 //components
 import Navbar from "../components/Navbar";
@@ -68,7 +69,17 @@ function RoutesDestination() {
                 !auth && !isLoading ? (
                   <Navigate to={ROUTES.login} />
                 ) : (
-                  <Profile />
+                  <EditProfile />
+                )
+              }
+            />
+            <Route
+              path={ROUTES.user(":id")}
+              element={
+                !auth && !isLoading ? (
+                  <Navigate to={ROUTES.login} />
+                ) : (
+                  <Phofire />
                 )
               }
             />

@@ -1,32 +1,31 @@
-import React from "react";
-import { useParams } from "react-router";
+import React, { useContext } from "react";
 import { BsFillEyeFill, BsPencilFill, BsXLg } from "react-icons/bs";
-import { useQuery } from "@tanstack/react-query";
-import { getUserId } from "../../services/http/phofile/getUserId";
-import { toast } from "react-toastify";
-import { api, UserUploads } from "../../utils/config";
+import { useData } from "./hooks/index";
+import { UserUploads } from "../../utils/config";
 
 export default function Phofile() {
-  const { id } = useParams();
-  const { data } = useQuery(["dataPhofile"], () => getUserId(id ? id : ""), {
-    onError: (err: Error) => {
-      toast.error("OPS... ocorreu um erro ao carregar os dados");
-    },
-  });
-  console.log(data);
+  const data = useData();
 
   return (
-    <div className="flex justify-center mt-8 items-center ">
-      {data?.profileImage && (
-        <img
-          src={UserUploads + data.profileImage}
-          alt={data.name}
-          className="w-[110px] h-[100px] rounded-full"
-        />
-      )}
-      <div className="flex flex-col ml-4 border-b-2 pb-4  border-[#787878]">
-        <p> Name: {data?.name}</p>
-        {data?.bio && <p>Bio: {data.bio}</p>}
+    <div className="max-w-[1200px] mx-auto mt-10">
+      <div className="flex items-center justify-center">
+        {data.data?.profileImage && (
+          <img
+            src={UserUploads + data.data.profileImage}
+            alt={data.data.name}
+            className="w-[110px] h-[100px] rounded-full"
+          />
+        )}
+        <div className="flex flex-col">
+          <div className="flex flex-col ml-4 border-b-2 pb-4  border-[#787878]">
+            <p> Name: {data?.data?.name}</p>
+            {data.data?.bio && <p>Bio: {data.data?.bio}</p>}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-10">
+        {data.id === data.auth?._id && <p>pçaaaaaa</p>}
       </div>
     </div>
   );

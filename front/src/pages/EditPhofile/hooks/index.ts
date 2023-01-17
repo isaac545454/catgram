@@ -8,6 +8,12 @@ import { ChangeEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { updatePhofile } from "../../../services/http/editProfile/updateData";
 import { Data } from "../typesLocal/index";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Schema } from "../yup/index";
+import { UserUploads } from "../../../utils/config";
+import { GetProfile } from "../../../services/http/editProfile/getData";
+import { useQuery } from "@tanstack/react-query";
 
 export const useData = () => {
   const [image, setImage] = useState<string>(
@@ -16,7 +22,27 @@ export const useData = () => {
   const [file, setFile] = useState<File | null>(null);
   const queryClient = useQueryClient();
 
-  //controle do envio do form
+  //
+  const methods = useForm({
+    resolver: yupResolver(Schema),
+  });
+
+  //
+  const { data: DataProfile, isLoading } = useQuery(["profile"], GetProfile, {
+    onSuccess: (res) => {
+      methods.setValue("name", res.name);
+      methods.setValue("bio", res.bio);
+
+      if (res.profileImage) {
+        setImage(UserUploads + res.profileImage);
+      }
+    },
+    onError: (err) => {
+      toast.error("erro ao carregar os dados");
+    },
+  });
+
+  //
   const putProfile = useMutation<any, AxiosError<any>, Data>(
     (data) => updatePhofile(data),
     {
@@ -30,7 +56,7 @@ export const useData = () => {
     }
   );
 
-  ///envio do formulario
+  ///
   const handleSubmit = (data: any) => {
     const req: Data = {
       ...data,
@@ -40,7 +66,7 @@ export const useData = () => {
     console.log(req);
   };
 
-  //função da imagem aparecer na tela
+  //
   const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
 
@@ -53,7 +79,7 @@ export const useData = () => {
     }
   };
 
-  return { handleSubmit, handleImage, image, setImage };
+  return { handleSubmit, handleImage, image, setImage, methods, DataProfile };
 };
 
 export const useSetValue = () => {};

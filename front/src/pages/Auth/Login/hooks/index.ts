@@ -8,11 +8,16 @@ import { useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../../../../navigation/ROUTES";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import schema from "../yup/index";
 
 export function useLogin() {
   const { setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
-  //use mutage para o post do login
+  const methods = useForm({ resolver: yupResolver(schema) });
+
+  //
   const loginPost = useMutation<LoginRes, AxiosError<any>, LoginReq>(
     (data) => loginHttp(data.email, data.password),
     {
@@ -29,7 +34,7 @@ export function useLogin() {
     }
   );
 
-  //funcao executada pelo onsubmit do react-hook-form
+  //
   const handleSubmit = (data: any) => {
     const { email, password } = data;
     const loginReq: LoginReq = {
@@ -42,5 +47,6 @@ export function useLogin() {
   return {
     handleSubmit,
     loginPost,
+    methods,
   };
 }

@@ -1,19 +1,13 @@
 import { Link } from "react-router-dom";
 import { BiRotateRight } from "react-icons/bi";
-
-//hooks
-import { useState, useEffect } from "react";
+//
 import { useRister } from "./hooks";
 import { ROUTES } from "../../../navigation/ROUTES";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import schema from "./yup/index";
-
+//
 import Input from "../../../components/Input";
 
 export default function Register() {
-  const { handleSubmit, RegisterPost } = useRister();
-  const methods = useForm({ resolver: yupResolver(schema) });
+  const { handleSubmit, RegisterPost, methods } = useRister();
 
   return (
     <div className="w-[40vw] mt-10 rounded-md bg-black py-8 px-8 mx-auto border border-[#363636]">

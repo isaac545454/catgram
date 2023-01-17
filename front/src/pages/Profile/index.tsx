@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import { BsFillEyeFill, BsPencilFill, BsXLg } from "react-icons/bs";
 import { useData } from "./hooks/index";
 import { UserUploads } from "../../utils/config";

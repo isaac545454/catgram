@@ -6,9 +6,13 @@ import { AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../../../../navigation/ROUTES";
+import { yupResolver } from "@hookform/resolvers/yup";
+import schema from "../yup/index";
+import { useForm } from "react-hook-form";
 
 export function useRister() {
   ///useMutate para requ post
+  const methods = useForm({ resolver: yupResolver(schema) });
   const navigate = useNavigate();
   const RegisterPost = useMutation<Response, AxiosError<any>, Request>(
     (data) => RegisterLoginPost(data),
@@ -35,5 +39,6 @@ export function useRister() {
   return {
     handleSubmit,
     RegisterPost,
+    methods,
   };
 }

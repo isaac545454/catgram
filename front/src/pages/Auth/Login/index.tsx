@@ -2,18 +2,14 @@ import { Link } from "react-router-dom";
 import { BiRotateRight } from "react-icons/bi";
 
 //hooks
-import { useState, useEffect, useContext } from "react";
+
 import { useLogin } from "./hooks";
 import { ROUTES } from "../../../navigation/ROUTES";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import schema from "./yup/index";
 
 import Input from "../../../components/Input";
 
 export default function Register() {
-  const { handleSubmit, loginPost } = useLogin();
-  const methods = useForm({ resolver: yupResolver(schema) });
+  const { handleSubmit, loginPost, methods } = useLogin();
 
   return (
     <div className="w-[40vw] mt-10 rounded-md bg-black py-8 px-8 mx-auto border border-[#363636]">

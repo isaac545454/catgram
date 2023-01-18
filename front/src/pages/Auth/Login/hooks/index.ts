@@ -15,7 +15,11 @@ import schema from "../yup/index";
 export function useLogin() {
   const { setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
-  const methods = useForm({ resolver: yupResolver(schema) });
+  const {
+    register,
+    formState: { errors },
+    handleSubmit: handle,
+  } = useForm({ resolver: yupResolver(schema) });
 
   //
   const loginPost = useMutation<LoginRes, AxiosError<any>, LoginReq>(
@@ -47,6 +51,8 @@ export function useLogin() {
   return {
     handleSubmit,
     loginPost,
-    methods,
+    register,
+    errors,
+    handle,
   };
 }

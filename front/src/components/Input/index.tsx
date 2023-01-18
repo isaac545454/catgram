@@ -15,7 +15,7 @@ export default function index({
 }: Props) {
   return (
     <>
-      <input {...res} {...methods.register(validationName)} />
+      <input {...res} {...methods(validationName)} />
       <ErrorMessage
         errors={errors}
         name={validationName!}

@@ -1,11 +1,5 @@
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-  useNavigate,
-  Navigate,
-} from "react-router-dom";
-import React, { useContext, useEffect } from "react";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { useContext } from "react";
 import { AuthContext } from "../context/index";
 
 //pages

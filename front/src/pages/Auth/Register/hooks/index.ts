@@ -12,7 +12,11 @@ import { useForm } from "react-hook-form";
 
 export function useRister() {
   ///useMutate para requ post
-  const methods = useForm({ resolver: yupResolver(schema) });
+  const {
+    handleSubmit: handle,
+    formState: { errors },
+    register,
+  } = useForm({ resolver: yupResolver(schema) });
   const navigate = useNavigate();
   const RegisterPost = useMutation<Response, AxiosError<any>, Request>(
     (data) => RegisterLoginPost(data),
@@ -39,6 +43,8 @@ export function useRister() {
   return {
     handleSubmit,
     RegisterPost,
-    methods,
+    register,
+    errors,
+    handle,
   };
 }

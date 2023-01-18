@@ -23,15 +23,20 @@ export const useData = () => {
   const queryClient = useQueryClient();
 
   //
-  const methods = useForm({
+  const {
+    register,
+    setValue,
+    handleSubmit: handle,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(Schema),
   });
 
   //
   const { data: DataProfile, isLoading } = useQuery(["profile"], GetProfile, {
     onSuccess: (res) => {
-      methods.setValue("name", res.name);
-      methods.setValue("bio", res.bio);
+      setValue("name", res.name);
+      setValue("bio", res.bio);
 
       if (res.profileImage) {
         setImage(UserUploads + res.profileImage);
@@ -79,7 +84,16 @@ export const useData = () => {
     }
   };
 
-  return { handleSubmit, handleImage, image, setImage, methods, DataProfile };
+  return {
+    handleSubmit,
+    handleImage,
+    image,
+    setImage,
+    register,
+    DataProfile,
+    handle,
+    errors,
+  };
 };
 
 export const useSetValue = () => {};

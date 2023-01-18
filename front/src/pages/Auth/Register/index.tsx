@@ -7,7 +7,7 @@ import { ROUTES } from "../../../navigation/ROUTES";
 import Input from "../../../components/Input";
 
 export default function Register() {
-  const { handleSubmit, RegisterPost, methods } = useRister();
+  const { handleSubmit, RegisterPost, errors, handle, register } = useRister();
 
   return (
     <div className="w-[40vw] mt-10 rounded-md bg-black py-8 px-8 mx-auto border border-[#363636]">
@@ -17,30 +17,30 @@ export default function Register() {
           Cadastre-se para postar foto do seu pet
         </p>
       </div>
-      <form onSubmit={methods.handleSubmit(handleSubmit)} className="">
+      <form onSubmit={handle(handleSubmit)} className="">
         <Input
           placeholder="Nome"
-          errors={methods.formState.errors}
+          errors={errors}
           validationName="name"
-          methods={methods}
+          methods={register}
         />
         <Input
           placeholder="E-mail"
-          errors={methods.formState.errors}
+          errors={errors}
           validationName="email"
-          methods={methods}
+          methods={register}
         />
         <Input
           placeholder="senha"
-          errors={methods.formState.errors}
+          errors={errors}
           validationName="password"
-          methods={methods}
+          methods={register}
         />
         <Input
           placeholder="confirme sua senha "
-          errors={methods.formState.errors}
+          errors={errors}
           validationName="confirmPassword"
-          methods={methods}
+          methods={register}
         />
         <button className="flex justify-center items-center">
           {RegisterPost.isLoading ? (

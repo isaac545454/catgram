@@ -1,13 +1,18 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { ChangeEvent, Dispatch, useState } from "react";
+import React from "react";
 import { useData } from "./hooks/index";
-import { useQuery } from "@tanstack/react-query";
 import Input from "../../components/Input";
 
-import { Datas } from "./typesLocal/index";
-
 export default function index() {
-  const data = useData();
+  const {
+    DataProfile,
+    handleImage,
+    handle,
+    image,
+    register,
+    handleSubmit,
+    errors,
+  } = useData();
 
   return (
     <div className="border borderr-[#363636] bg-black px-8 py-6 mx-auto my-4 max-w-[40%] ">
@@ -15,18 +20,18 @@ export default function index() {
         <h2 className=" ">Edit os dados do seu PET</h2>
         <p className="">Adicione uma Imagem de Perfil para o seu PET</p>
       </div>
-      <form onSubmit={data.methods.handleSubmit(data.handleSubmit)}>
+      <form onSubmit={handle(handleSubmit)}>
         <div className="flex-1  mx-auto my-4">
           <label>
             <img
-              src={data.image}
+              src={image}
               alt="foto de perfil"
               className="w-[300px] h-[200px] "
             />
             <input
               type="file"
               className="hidden"
-              onChange={data.handleImage}
+              onChange={handleImage}
               accept="image/png image/jpeg"
             />
           </label>
@@ -35,9 +40,9 @@ export default function index() {
           <Input
             type="text"
             placeholder="Nome"
-            methods={data.methods}
+            methods={register}
             validationName="name"
-            errors={data.methods.formState.errors}
+            errors={errors}
           />
         </label>
 
@@ -45,7 +50,7 @@ export default function index() {
           type="email"
           placeholder="E-mail"
           disabled
-          value={data.DataProfile?.email}
+          value={DataProfile?.email}
         />
 
         <label>
@@ -53,9 +58,9 @@ export default function index() {
           <Input
             type="text"
             placeholder="Descrição do perfil"
-            methods={data.methods}
+            methods={register}
             validationName="bio"
-            errors={data.methods.formState.errors}
+            errors={errors}
           />
         </label>
         <label>
@@ -63,9 +68,9 @@ export default function index() {
           <Input
             type="text"
             placeholder="Digite sua nova senha"
-            methods={data.methods}
+            methods={register}
             validationName="password"
-            errors={data.methods.formState.errors}
+            errors={errors}
           />
         </label>
         <input type="submit" value="Atualizar" />

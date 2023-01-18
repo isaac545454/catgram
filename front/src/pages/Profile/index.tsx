@@ -4,8 +4,16 @@ import { UserUploads } from "../../utils/config";
 import Input from "../../components/Input";
 
 export default function Phofile() {
-  const { data, verifyUser, errors, register, handle, handleSubmit } =
-    useData();
+  const {
+    data,
+    verifyUser,
+    errors,
+    register,
+    handle,
+    handleSubmit,
+    dataProfile,
+  } = useData();
+  console.log(dataProfile);
 
   return (
     <div className="max-w-[1200px] mx-auto mt-10">
@@ -28,6 +36,9 @@ export default function Phofile() {
       <div className="mt-10 w-[40vw] mx-auto">
         {verifyUser() && (
           <form onSubmit={handle(handleSubmit)}>
+            <div className="my-3 flex  font-bold text-2xl">
+              <h1>compartilhe os momentos do seu pet</h1>
+            </div>
             <label>
               <span>Titulo para Foto:</span>
               <Input

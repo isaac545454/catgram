@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Schema } from "../yup/index";
 import { newPost } from "../../../services/http/phofile/newPost";
+import { getAllPostUser } from "../../../services/http/phofile/getAllPostUser";
 import { createPhofile } from "../../../services/http/phofile/typesLocal/index";
 import { AxiosError } from "axios";
 import { ROUTES } from "../../../navigation/ROUTES";
@@ -28,6 +29,10 @@ export const useData = () => {
     },
   });
   //
+
+  const { data: dataProfile } = useQuery(["photosUser"], () =>
+    getAllPostUser(id ? id : "")
+  );
 
   const { mutate } = useMutation<createPhofile, AxiosError<string>, FormData>(
     (data) => newPost(data),
@@ -65,5 +70,6 @@ export const useData = () => {
     errors,
     handleSubmit,
     handle,
+    dataProfile,
   };
 };

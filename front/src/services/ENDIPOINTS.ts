@@ -4,5 +4,6 @@ export const ENDEPOINTS = {
   register: "users/register",
   profile: "users/profile",
   photos: "photos/",
+  photosUser: (id: string) => `photos/user/${id}`,
   user_id: (id: string) => `users/${id}`,
 };

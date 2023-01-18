@@ -2,7 +2,7 @@ import { getUserId } from "../../../services/http/phofile/getUserId";
 import { toast } from "react-toastify";
 import { useParams, useNavigate, Route } from "react-router";
 import { AuthContext } from "../../../context";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -16,6 +16,7 @@ import { ROUTES } from "../../../navigation/ROUTES";
 export const useData = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const client = useQueryClient();
   const { auth } = useContext(AuthContext);
   const {
     register,
@@ -39,6 +40,7 @@ export const useData = () => {
     {
       onSuccess(res) {
         toast.success("publicacado com sucesso!");
+        client.invalidateQueries(["photosUser"]);
         navigate(ROUTES.home);
       },
       onError(err) {

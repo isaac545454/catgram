@@ -1,5 +1,5 @@
 import axios from "axios";
-import { api, uploads } from "../../../utils/config";
+import { api } from "../../../utils/config";
 import { ENDEPOINTS } from "../../ENDIPOINTS";
 import { resProfile } from "./typesLocal/index";
 

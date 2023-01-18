@@ -2,6 +2,9 @@ import { BsFillEyeFill, BsPencilFill, BsXLg } from "react-icons/bs";
 import { useData } from "./hooks/index";
 import { UserUploads } from "../../utils/config";
 import Input from "../../components/Input";
+import { PhotosUploads } from "../../utils/config";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../../navigation/ROUTES";
 
 export default function Phofile() {
   const {
@@ -13,7 +16,7 @@ export default function Phofile() {
     handleSubmit,
     dataProfile,
   } = useData();
-  console.log(dataProfile);
+  console.log(PhotosUploads);
 
   return (
     <div className="max-w-[1200px] mx-auto mt-10">
@@ -59,6 +62,29 @@ export default function Phofile() {
             </label>
           </form>
         )}
+        <div className="my-4">
+          {dataProfile?.length === 0 && <p>Ainda não a publicações</p>}
+          {dataProfile && (
+            <>
+              <h2 className="font-bold text-xl mb-3">Fotos Publicadas</h2>
+              {dataProfile.map((item) => (
+                <div key={item._id} className="mb-5">
+                  <img
+                    src={PhotosUploads + item.image}
+                    alt={item.title}
+                    className="w-full"
+                  />
+                  <p className="mt-2 font-bold">{item.title}</p>
+                  {verifyUser() ? (
+                    <p>actions</p>
+                  ) : (
+                    <Link to={ROUTES.photosView(item._id)}>Ver</Link>
+                  )}
+                </div>
+              ))}
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

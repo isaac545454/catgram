@@ -4,4 +4,5 @@ export const ROUTES = {
   register: "/register",
   user: (id: string) => `/users/${id}`,
   profile: "/profile",
+  photosView: (id: string) => `/photos/${id}`,
 };

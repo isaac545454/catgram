@@ -1,11 +1,11 @@
 import axios from "axios";
 import { api } from "../../../utils/config";
 import { ENDEPOINTS } from "../../ENDIPOINTS";
-import { GetUserId } from "./typesLocal/index";
+import { createPhofile } from "./typesLocal/index";
 
-export const getUserId = async (id: string) => {
-  const url = api + ENDEPOINTS.user_id(id);
-  const res = await axios.post<GetUserId>(url);
+export const newPost = async (data: FormData) => {
+  const url = api + ENDEPOINTS.photos;
+  const res = await axios.post<createPhofile>(url, data);
 
   return res.data;
 };

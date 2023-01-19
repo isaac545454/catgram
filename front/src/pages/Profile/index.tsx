@@ -1,4 +1,10 @@
-import { BsFillEyeFill, BsPencilFill, BsXLg } from "react-icons/bs";
+import {
+  BsFillEyeFill,
+  BsPencilFill,
+  BsX,
+  BsXLg,
+  BsTrash,
+} from "react-icons/bs";
 import { useData } from "./hooks/index";
 import { UserUploads } from "../../utils/config";
 import Input from "../../components/Input";
@@ -15,8 +21,8 @@ export default function Phofile() {
     handle,
     handleSubmit,
     dataProfile,
+    deletePhotoUser,
   } = useData();
-  console.log(PhotosUploads);
 
   return (
     <div className="max-w-[1200px] mx-auto mt-10">
@@ -74,9 +80,19 @@ export default function Phofile() {
                     alt={item.title}
                     className="w-full"
                   />
-                  <p className="mt-2 font-bold">{item.title}</p>
+
                   {verifyUser() ? (
-                    <p>actions</p>
+                    <div className="flex w-full justify-around cursor-pointer my-4">
+                      <Link to={ROUTES.photosView(item._id)}>
+                        <BsFillEyeFill size={25} />
+                      </Link>
+                      <span>
+                        <BsPencilFill size={25} />
+                      </span>
+                      <span onClick={() => deletePhotoUser(item._id)}>
+                        <BsTrash size={25} />
+                      </span>
+                    </div>
                   ) : (
                     <Link to={ROUTES.photosView(item._id)}>Ver</Link>
                   )}

@@ -1,6 +1,7 @@
 const Photo = require("../models/photo");
 const mongoose = require("mongoose");
 const User = require("../models/User");
+const console = require("console");
 
 //insert a foto
 
@@ -32,27 +33,24 @@ const insertPhoto = async (req, res) => {
 
 const deletePhoto = async (req, res) => {
   const { id } = req.params;
-
   const reqUser = req.user;
+  console.log({ id, reqUser });
 
-  try {
-    const photo = await Photo.findById(mongoose.Types.ObjectId(id));
+  // try {
+  const photo = await Photo.findById(mongoose.Types.ObjectId(id));
 
-    // Check if photo exists
-    if (!photo) {
-      res.status(404).json({ errors: ["Foto não encontrada!"] });
-      return;
-    }
-
-    // Check if photo belongs to user
-    if (!photo.userID.equals(reqUser._id)) {
-      res
-        .status(422)
-        .json({ errors: ["Ocorreu um erro, tente novamente mais tarde"] });
-      return;
-    }
-  } catch (error) {
+  // Check if photo exists
+  console.log(photo);
+  if (!photo) {
     res.status(404).json({ errors: ["Foto não encontrada!"] });
+    return;
+  }
+
+  // Check if photo belongs to user
+  if (!photo.userID.equals(reqUser._id)) {
+    res
+      .status(422)
+      .json({ errors: ["Ocorreu um erro, tente novamente mais tarde"] });
     return;
   }
 

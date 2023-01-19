@@ -12,6 +12,8 @@ import { getAllPostUser } from "../../../services/http/phofile/getAllPostUser";
 import { createPhofile } from "../../../services/http/phofile/typesLocal/index";
 import { AxiosError } from "axios";
 import { ROUTES } from "../../../navigation/ROUTES";
+import { deletePhotoReq } from "../typesLocal/index";
+import { deletePhoto } from "../../../services/http/phofile/deletePhotos";
 
 export const useData = () => {
   const { id } = useParams();
@@ -35,25 +37,26 @@ export const useData = () => {
     getAllPostUser(id ? id : "")
   );
 
-  const { mutate } = useMutation<createPhofile, AxiosError<string>, FormData>(
-    (data) => newPost(data),
-    {
-      onSuccess(res) {
-        toast.success("publicacado com sucesso!");
-        client.invalidateQueries(["photosUser"]);
-        navigate(ROUTES.home);
-      },
-      onError(err) {
-        toast.error("Erro ao carregar");
-      },
-    }
-  );
+  const { mutate: NewPost } = useMutation<
+    createPhofile,
+    AxiosError<string>,
+    FormData
+  >((data) => newPost(data), {
+    onSuccess(res) {
+      toast.success("publicacado com sucesso!");
+      client.invalidateQueries(["photosUser"]);
+      navigate(ROUTES.home);
+    },
+    onError(err) {
+      toast.error("Erro ao carregar");
+    },
+  });
 
   const handleSubmit = (data: any) => {
     const form = new FormData();
     form.append("image", data.filePhofile[0]);
     form.append("title", data.title);
-    mutate(form);
+    NewPost(form);
   };
 
   const verifyUser = () => {
@@ -63,12 +66,31 @@ export const useData = () => {
     return false;
   };
 
+  const { mutate: deletePhotoUserReq } = useMutation<
+    string,
+    AxiosError<any>,
+    deletePhotoReq
+  >((data) => deletePhoto(data.id), {
+    onSuccess() {
+      toast.success("Deletado com sucesso!");
+      client.invalidateQueries(["photosUser"]);
+    },
+    onError: () => {
+      toast.error("ops... houve um erro");
+    },
+  });
+
+  const deletePhotoUser = (id: string) => {
+    deletePhotoUserReq({ id });
+  };
+
   return {
     data,
     auth,
     id,
     verifyUser,
     register,
+    deletePhotoUser,
     errors,
     handleSubmit,
     handle,

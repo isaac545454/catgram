@@ -1,6 +1,6 @@
 import { getUserId } from "../../../services/http/phofile/getUserId";
 import { toast } from "react-toastify";
-import { useParams, useNavigate, Route } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { AuthContext } from "../../../context";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
@@ -12,9 +12,11 @@ import { getAllPostUser } from "../../../services/http/phofile/getAllPostUser";
 import { createPhofile } from "../../../services/http/phofile/typesLocal/index";
 import { AxiosError } from "axios";
 import { ROUTES } from "../../../navigation/ROUTES";
-import { deletePhotoReq } from "../typesLocal/index";
+import { deletePhotoReq, UpdatePhoto } from "../typesLocal/index";
 import { deletePhoto } from "../../../services/http/phofile/deletePhotos";
+import { updatePhoto } from "../../../services/http/phofile/updatePhoto";
 
+////
 export const useData = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -31,12 +33,13 @@ export const useData = () => {
       toast.error("OPS... ocorreu um erro ao carregar os dados");
     },
   });
-  //
 
+  //
   const { data: dataProfile } = useQuery(["photosUser"], () =>
     getAllPostUser(id ? id : "")
   );
 
+  //
   const { mutate: NewPost } = useMutation<
     createPhofile,
     AxiosError<string>,
@@ -52,6 +55,7 @@ export const useData = () => {
     },
   });
 
+  //
   const handleSubmit = (data: any) => {
     const form = new FormData();
     form.append("image", data.filePhofile[0]);
@@ -66,6 +70,25 @@ export const useData = () => {
     return false;
   };
 
+  return {
+    data,
+    auth,
+    id,
+    verifyUser,
+    register,
+
+    errors,
+    handleSubmit,
+    handle,
+    dataProfile,
+  };
+};
+
+////
+export const useDelete = () => {
+  const client = useQueryClient();
+
+  //
   const { mutate: deletePhotoUserReq } = useMutation<
     string,
     AxiosError<any>,
@@ -84,16 +107,37 @@ export const useData = () => {
     deletePhotoUserReq({ id });
   };
 
+  //
   return {
-    data,
-    auth,
-    id,
-    verifyUser,
-    register,
     deletePhotoUser,
-    errors,
-    handleSubmit,
-    handle,
-    dataProfile,
+  };
+};
+
+////
+export const useUpdate = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const client = useQueryClient();
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { mutate: updatePhotoMutation } = useMutation<
+    createPhofile,
+    AxiosError<any>,
+    UpdatePhoto
+  >((data) => updatePhoto(data), {
+    onSuccess: () => {
+      toast.success("post Atualizado com sucesso!");
+      client.invalidateQueries(["photosUser"]);
+    },
+    onError: (errro) => {
+      toast.error("Ops... houve um Erro");
+    },
+  });
+
+  const handleUpdatePhoto = (data: UpdatePhoto) => {
+    updatePhotoMutation(data);
+  };
+
+  return {
+    handleUpdatePhoto,
   };
 };

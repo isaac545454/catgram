@@ -28,3 +28,8 @@ type comments = {
   userImage?: null | string;
   userID: string;
 };
+
+export type PropsReq = {
+  id: string;
+  title: string;
+};

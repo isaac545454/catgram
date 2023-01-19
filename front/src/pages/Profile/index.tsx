@@ -5,7 +5,7 @@ import {
   BsXLg,
   BsTrash,
 } from "react-icons/bs";
-import { useData } from "./hooks/index";
+import { useData, useDelete, useUpdate } from "./hooks/index";
 import { UserUploads } from "../../utils/config";
 import Input from "../../components/Input";
 import { PhotosUploads } from "../../utils/config";
@@ -21,8 +21,9 @@ export default function Phofile() {
     handle,
     handleSubmit,
     dataProfile,
-    deletePhotoUser,
   } = useData();
+  const { deletePhotoUser } = useDelete();
+  const { handleUpdatePhoto } = useUpdate();
 
   return (
     <div className="max-w-[1200px] mx-auto mt-10">

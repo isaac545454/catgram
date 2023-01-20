@@ -5,9 +5,11 @@ import {
   BsXLg,
   BsTrash,
 } from "react-icons/bs";
-import { useData, useDelete, useUpdate } from "./hooks/index";
+import { useData } from "./hooks/useData";
 import { UserUploads } from "../../utils/config";
 import Input from "../../components/Input";
+import { useDelete } from "./hooks/useDelete";
+import { useUpdate } from "./hooks/useUpdate";
 import { PhotosUploads } from "../../utils/config";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../navigation/ROUTES";

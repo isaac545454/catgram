@@ -142,7 +142,12 @@ export default function Phofile() {
                       </span>
                     </div>
                   ) : (
-                    <Link to={ROUTES.photosView(item._id)}>Ver</Link>
+                    <Link
+                      to={ROUTES.photosView(item._id)}
+                      className="w-full flex  justify-center bg-blue-500 p-3"
+                    >
+                      <BsFillEyeFill size={25} />
+                    </Link>
                   )}
                 </div>
               ))}

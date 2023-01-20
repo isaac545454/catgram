@@ -20,3 +20,8 @@ interface comments {
   userImage: string | null;
   userID: string;
 }
+
+export interface ResponseLike {
+  photosId: string;
+  userID: string;
+}

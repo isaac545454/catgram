@@ -15,7 +15,9 @@ export default function Navbar() {
   const { auth, clearUser } = useContext(AuthContext);
   return (
     <div className="flex justify-between items-center bg-black border-b border-b-[#363636] px-4 py-6">
-      <Link to="/">Catgram</Link>
+      <Link to="/" className="font-bold text-2xl">
+        Catgram
+      </Link>
       <form className="flex items-center relative w-[20%]">
         <BsSearch className="absolute top-3 left-2 " color="#000" />
         <input

@@ -14,7 +14,7 @@ function App() {
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
           <Routes />
-          <ToastContainer />
+          <ToastContainer theme="colored" />
         </QueryClientProvider>
       </AuthProvider>
     </div>

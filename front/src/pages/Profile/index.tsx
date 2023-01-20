@@ -23,7 +23,16 @@ export default function Phofile() {
     dataProfile,
   } = useData();
   const { deletePhotoUser } = useDelete();
-  const { handleUpdatePhoto } = useUpdate();
+  const {
+    handleUpdatePhoto,
+    ViewEditPhotosLayout,
+    ViewEdit,
+    errors: errorsUpdate,
+    register: registerUpdate,
+    handle: handleUpdate,
+    dateUpdatdPhotos,
+    cancelEdit,
+  } = useUpdate();
 
   return (
     <div className="max-w-[1200px] mx-auto mt-10">
@@ -44,7 +53,7 @@ export default function Phofile() {
       </div>
 
       <div className="mt-10 w-[40vw] mx-auto">
-        {verifyUser() && (
+        {verifyUser() && !ViewEdit && (
           <form onSubmit={handle(handleSubmit)}>
             <div className="my-3 flex  font-bold text-2xl">
               <h1>compartilhe os momentos do seu pet</h1>
@@ -69,6 +78,34 @@ export default function Phofile() {
             </label>
           </form>
         )}
+        {ViewEdit && (
+          <form onSubmit={handleUpdate(handleUpdatePhoto)}>
+            <div className="my-3 flex  font-bold text-2xl">
+              <h1>edit sua publicação</h1>
+            </div>
+            <div className="flex justify-center mb-3">
+              <img
+                src={PhotosUploads + dateUpdatdPhotos.profileImage}
+                alt={dateUpdatdPhotos.title}
+                className=" w-full "
+              />
+            </div>
+            <label>
+              <span>deseja alterar o Titulo para:</span>
+              <Input
+                methods={registerUpdate}
+                validationName="titleUpdate"
+                errors={errorsUpdate}
+              />
+            </label>
+            <label>
+              <button className="w-full mt-4 bg-blue-500">Atualizar</button>
+            </label>
+            <span className="w-full mt-4 p-2 bg-slate-500" onClick={cancelEdit}>
+              Cancelar
+            </span>
+          </form>
+        )}
         <div className="my-4">
           {dataProfile?.length === 0 && <p>Ainda não a publicações</p>}
           {dataProfile && (
@@ -87,7 +124,15 @@ export default function Phofile() {
                       <Link to={ROUTES.photosView(item._id)}>
                         <BsFillEyeFill size={25} />
                       </Link>
-                      <span>
+                      <span
+                        onClick={() =>
+                          ViewEditPhotosLayout({
+                            id: item._id,
+                            title: item.title,
+                            profileImage: item.image,
+                          })
+                        }
+                      >
                         <BsPencilFill size={25} />
                       </span>
                       <span onClick={() => deletePhotoUser(item._id)}>

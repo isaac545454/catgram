@@ -6,15 +6,16 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Schema } from "../yup/index";
+import { Schema, SchemaUpdate } from "../yup/index";
 import { newPost } from "../../../services/http/phofile/newPost";
 import { getAllPostUser } from "../../../services/http/phofile/getAllPostUser";
 import { createPhofile } from "../../../services/http/phofile/typesLocal/index";
 import { AxiosError } from "axios";
 import { ROUTES } from "../../../navigation/ROUTES";
-import { deletePhotoReq, UpdatePhoto } from "../typesLocal/index";
+import { deletePhotoReq, UpdatePhoto, PropsEdit } from "../typesLocal/index";
 import { deletePhoto } from "../../../services/http/phofile/deletePhotos";
 import { updatePhoto } from "../../../services/http/phofile/updatePhoto";
+import { useState } from "react";
 
 ////
 export const useData = () => {
@@ -117,6 +118,19 @@ export const useDelete = () => {
 export const useUpdate = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const client = useQueryClient();
+  const [ViewEdit, setViewEdit] = useState<boolean>(false);
+  const [dateUpdatdPhotos, setDateUpdatdPhotos] = useState<PropsEdit>({
+    id: "",
+    title: "",
+    profileImage: "",
+  });
+
+  const {
+    register,
+    formState: { errors },
+    setValue,
+    handleSubmit: handle,
+  } = useForm({ resolver: yupResolver(SchemaUpdate) });
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { mutate: updatePhotoMutation } = useMutation<
@@ -127,17 +141,44 @@ export const useUpdate = () => {
     onSuccess: () => {
       toast.success("post Atualizado com sucesso!");
       client.invalidateQueries(["photosUser"]);
+      setViewEdit(false);
+      setDateUpdatdPhotos({ id: "", title: "", profileImage: "" });
     },
     onError: (errro) => {
       toast.error("Ops... houve um Erro");
     },
   });
 
-  const handleUpdatePhoto = (data: UpdatePhoto) => {
-    updatePhotoMutation(data);
+  const ViewEditPhotosLayout = (data: PropsEdit) => {
+    setViewEdit(true);
+    setDateUpdatdPhotos(data);
+    setValue("titleUpdate", data.title);
+    console.log(data);
+  };
+
+  const cancelEdit = () => {
+    setViewEdit(false);
+    setDateUpdatdPhotos({ id: "", title: "", profileImage: "" });
+  };
+
+  const handleUpdatePhoto = (data: any) => {
+    const dataReq = {
+      title: data.titleUpdate,
+      id: dateUpdatdPhotos.id,
+    };
+    console.log(dataReq);
+
+    updatePhotoMutation(dataReq);
   };
 
   return {
     handleUpdatePhoto,
+    ViewEdit,
+    ViewEditPhotosLayout,
+    register,
+    errors,
+    handle,
+    cancelEdit,
+    dateUpdatdPhotos,
   };
 };

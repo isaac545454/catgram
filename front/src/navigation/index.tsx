@@ -2,25 +2,23 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/index";
 
-//pages
+//
 import Home from "../pages/Home/Home";
 import Login from "../pages/Auth/Login/index";
 import Register from "../pages/Auth/Register/index";
 import EditProfile from "../pages/EditPhofile";
 import Phofire from "../pages/Profile";
+import PhotosView from "../pages/photoView";
 
-//components
+//
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-//routes
 import { ROUTES } from "./ROUTES";
 
 function RoutesDestination() {
   const { auth, isLoading } = useContext(AuthContext);
-  // useEffect(() => {
 
-  // }, []);
   if (isLoading) {
     return (
       <div>
@@ -74,6 +72,16 @@ function RoutesDestination() {
                   <Navigate to={ROUTES.login} />
                 ) : (
                   <Phofire />
+                )
+              }
+            />
+            <Route
+              path={ROUTES.photosView(":id")}
+              element={
+                !auth && !isLoading ? (
+                  <Navigate to={ROUTES.login} />
+                ) : (
+                  <PhotosView />
                 )
               }
             />

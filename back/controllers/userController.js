@@ -66,7 +66,7 @@ const login = async (req, res) => {
       token: generaToken(user._id),
     });
   } catch (error) {
-    console.log(error);
+    //
   }
 };
 
@@ -79,7 +79,6 @@ const getCurrentUser = async (req, res) => {
 const update = async (req, res) => {
   const { name, password, bio } = req.body;
   const data = req.body;
-  console.log(data);
 
   let profileImage = null;
 

@@ -1,9 +1,4 @@
-import React, {
-  createContext,
-  ReactNode,
-  useState,
-  useLayoutEffect,
-} from "react";
+import React, { createContext, ReactNode, useState, useEffect } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -30,7 +25,7 @@ export function AuthProvider({ children }: Props) {
   const [auth, setAuth] = useState<Auth | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const token = JSON.parse(localStorage.getItem("user") as any);
     if (token) {
       axios.defaults.headers["Authorization"] = `Bearer ${token.token}`;

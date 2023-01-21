@@ -8,7 +8,6 @@ import { ROUTES } from "../../navigation/ROUTES";
 export default function PhotosView() {
   const { getResponsePhoto, verifyLikes, reqLike, setText, text, reqComment } =
     useGetPhotos();
-  console.log(verifyLikes());
 
   return (
     <div className="max-w-[600px] mx-auto my-10">
@@ -55,14 +54,17 @@ export default function PhotosView() {
       <div className="mt-4">
         {getResponsePhoto?.comments.map((item) => (
           <Link to={ROUTES.user(item.userID)}>
-            <div className="flex items-center mt-4">
-              <img
-                src={UserUploads + item.userImage}
-                alt="alt"
-                className="w-[80px] h-[80px] rounded-full mr-4"
-              />
+            <div className="  mt-4">
+              <div className="flex items-center">
+                <img
+                  src={UserUploads + item.userImage}
+                  alt="alt"
+                  className="w-[50px] h-[50px] rounded-full mr-4"
+                />
+                <p className="font-bold text-xl">{item.userName}</p>
+              </div>
 
-              <p>{item.comment}</p>
+              <p className="ml-1 mt-2">{item.comment}</p>
             </div>
           </Link>
         ))}

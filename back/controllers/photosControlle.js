@@ -34,13 +34,12 @@ const insertPhoto = async (req, res) => {
 const deletePhoto = async (req, res) => {
   const { id } = req.params;
   const reqUser = req.user;
-  console.log({ id, reqUser });
 
   // try {
   const photo = await Photo.findById(mongoose.Types.ObjectId(id));
 
   // Check if photo exists
-  console.log(photo);
+
   if (!photo) {
     res.status(404).json({ errors: ["Foto não encontrada!"] });
     return;

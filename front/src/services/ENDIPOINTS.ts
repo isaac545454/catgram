@@ -4,6 +4,7 @@ export const ENDEPOINTS = {
   register: "users/register",
   profile: "users/profile",
   photos: "photos/",
+  getAllPost: "photos/",
   photosUser: (id: string) => `photos/user/${id}`,
   deletePhoto: (id: string) => `photos/${id}`,
   user_id: (id: string) => `users/${id}`,

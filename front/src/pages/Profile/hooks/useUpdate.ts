@@ -48,7 +48,6 @@ export const useUpdate = () => {
     setViewEdit(true);
     setDateUpdatdPhotos(data);
     setValue("titleUpdate", data.title);
-    console.log(data);
   };
 
   const cancelEdit = () => {
@@ -61,7 +60,6 @@ export const useUpdate = () => {
       title: data.titleUpdate,
       id: dateUpdatdPhotos.id,
     };
-    console.log(dataReq);
 
     updatePhotoMutation(dataReq);
   };

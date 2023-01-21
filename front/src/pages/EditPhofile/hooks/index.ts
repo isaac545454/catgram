@@ -68,7 +68,6 @@ export const useData = () => {
       profileImage: file ? file : "",
     };
     putProfile.mutate(req);
-    console.log(req);
   };
 
   //

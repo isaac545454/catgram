@@ -14,6 +14,7 @@ import { putComment } from "../../../services/http/photos/putComment";
 export const useGetPhotos = () => {
   const { id } = useParams();
   const { auth } = useContext(AuthContext);
+
   const [text, setText] = useState<string>("");
   const client = useQueryClient();
 
@@ -21,6 +22,8 @@ export const useGetPhotos = () => {
     useQuery(["photosFilterId"], () => getPhotos(id ? id : ""));
 
   const verifyLikes = () => {
+    if (getResponsePhoto?.likes.length === 0) return false;
+
     return getResponsePhoto?.likes.includes(auth?._id!);
   };
 

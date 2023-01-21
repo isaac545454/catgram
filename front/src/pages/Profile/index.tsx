@@ -109,10 +109,10 @@ export default function Phofile() {
           </form>
         )}
         <div className="my-4">
-          {dataProfile?.length === 0 && <p>Ainda não a publicações</p>}
           {dataProfile && (
             <>
               <h2 className="font-bold text-xl mb-3">Fotos Publicadas</h2>
+              {dataProfile?.length === 0 && <p>Ainda não a publicações</p>}
               {dataProfile.map((item) => (
                 <div key={item._id} className="mb-5">
                   <img

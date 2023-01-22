@@ -10,4 +10,5 @@ export const ENDEPOINTS = {
   user_id: (id: string) => `users/${id}`,
   like: (id: string) => `photos/like/${id}`,
   comment: (id: string) => `photos/comment/${id}`,
+  search: (text: string) => `photos/search?q=${text}`,
 };

@@ -9,6 +9,7 @@ import Register from "../pages/Auth/Register/index";
 import EditProfile from "../pages/EditPhofile";
 import Phofire from "../pages/Profile";
 import PhotosView from "../pages/photoView";
+import Search from "../pages/Search";
 
 //
 import Navbar from "../components/Navbar";
@@ -82,6 +83,16 @@ function RoutesDestination() {
                   <Navigate to={ROUTES.login} />
                 ) : (
                   <PhotosView />
+                )
+              }
+            />
+            <Route
+              path={ROUTES.search(":text")}
+              element={
+                !auth && !isLoading ? (
+                  <Navigate to={ROUTES.login} />
+                ) : (
+                  <Search />
                 )
               }
             />

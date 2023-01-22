@@ -30,6 +30,4 @@ require("./config/db");
 
 app.use(router);
 
-app.listen(port, () => {
-  console.log("rodando");
-});
+app.listen(port);

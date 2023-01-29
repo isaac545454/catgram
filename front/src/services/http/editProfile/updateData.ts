@@ -8,11 +8,12 @@ const url = api + ENDEPOINTS.user;
 export const updatePhofile = async (data: Data) => {
   const form = new FormData();
 
+  const res = await axios.put(url, data);
+
   if (data.profileImage) {
     form.append("profileImage", data.profileImage);
     form.append("bio", data.bio);
   }
-  const res = await axios.put(url, data);
 
   const resImage = await axios.put(url, form, {
     headers: {

@@ -3,9 +3,9 @@ export interface Response {
   token: string;
 }
 
-export interface Request {
+export type FormValues = {
   name: string;
   email: string;
   password: string;
   confirmPassword: string;
-}
+};

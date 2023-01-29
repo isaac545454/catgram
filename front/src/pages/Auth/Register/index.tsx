@@ -7,7 +7,8 @@ import { ROUTES } from "../../../navigation/ROUTES";
 import Input from "../../../components/Input";
 
 export default function Register() {
-  const { handleSubmit, RegisterPost, errors, handle, register } = useRister();
+  const { handleSubmit, RegisterPost, errors, handle, register, isLoading } =
+    useRister();
 
   return (
     <div className="w-[40vw] mt-10 rounded-md bg-black py-8 px-8 mx-auto border border-[#363636]">
@@ -43,7 +44,7 @@ export default function Register() {
           methods={register}
         />
         <button className="flex justify-center items-center">
-          {RegisterPost.isLoading ? (
+          {isLoading ? (
             <BiRotateRight className="animate-spin " color="#fff" size={30} />
           ) : (
             <p>CADASTRAR</p>

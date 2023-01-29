@@ -12,7 +12,7 @@ export const usePageHome = () => {
   const { auth } = useContext(AuthContext);
   const { text } = useParams();
 
-  const { data: dataGetAllPost, isLoading: isLoadingGetALLPost } = useQuery(
+  const { data: dataGetAllPost } = useQuery(
     ["getPostsAll", text],
     () => getSearch(text!),
     {

@@ -10,7 +10,7 @@ export const useDelete = () => {
   //
   const { mutate: deletePhotoUserReq } = useMutation<
     string,
-    AxiosError<any>,
+    AxiosError,
     deletePhotoReq
   >((data) => deletePhoto(data.id), {
     onSuccess() {

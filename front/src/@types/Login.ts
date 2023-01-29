@@ -7,3 +7,8 @@ export interface LoginRes {
   _id: string;
   profileImage?: string;
 }
+
+export type FormValues = {
+  email: string;
+  password: string;
+};

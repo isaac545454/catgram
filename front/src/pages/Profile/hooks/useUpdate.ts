@@ -1,15 +1,14 @@
 import { toast } from "react-toastify";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SchemaUpdate } from "../yup/index";
-import { createPhofile } from "../../../services/http/phofile/typesLocal/index";
+import { createPhofile } from "../../../@types/Phofile";
 import { AxiosError } from "axios";
-import { UpdatePhoto, PropsEdit } from "../../../@types/Phofile";
+import { UpdatePhoto, PropsEdit, FormValues } from "../../../@types/Phofile";
 import { updatePhoto } from "../../../services/http/phofile/updatePhoto";
 import { useState } from "react";
 
-////
 export const useUpdate = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const client = useQueryClient();
@@ -25,7 +24,7 @@ export const useUpdate = () => {
     formState: { errors },
     setValue,
     handleSubmit: handle,
-  } = useForm({ resolver: yupResolver(SchemaUpdate) });
+  } = useForm<FormValues>({ resolver: yupResolver(SchemaUpdate) });
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { mutate: updatePhotoMutation } = useMutation<
@@ -39,7 +38,7 @@ export const useUpdate = () => {
       setViewEdit(false);
       setDateUpdatdPhotos({ id: "", title: "", profileImage: "" });
     },
-    onError: (errro) => {
+    onError: () => {
       toast.error("Ops... houve um Erro");
     },
   });
@@ -55,7 +54,7 @@ export const useUpdate = () => {
     setDateUpdatdPhotos({ id: "", title: "", profileImage: "" });
   };
 
-  const handleUpdatePhoto = (data: any) => {
+  const handleUpdatePhoto: SubmitHandler<FormValues> = (data) => {
     const dataReq = {
       title: data.titleUpdate,
       id: dateUpdatdPhotos.id,

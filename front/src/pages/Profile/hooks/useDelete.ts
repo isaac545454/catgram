@@ -7,7 +7,6 @@ import { deletePhoto } from "../../../services/http/phofile/deletePhotos";
 export const useDelete = () => {
   const client = useQueryClient();
 
-  //
   const { mutate: deletePhotoUserReq } = useMutation<
     string,
     AxiosError,
@@ -26,7 +25,6 @@ export const useDelete = () => {
     deletePhotoUserReq({ id });
   };
 
-  //
   return {
     deletePhotoUser,
   };

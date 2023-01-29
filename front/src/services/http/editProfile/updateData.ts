@@ -1,7 +1,7 @@
 import axios from "axios";
 import { api } from "../../../utils/config";
 import { ENDEPOINTS } from "../../ENDIPOINTS";
-import { Data } from "./typesLocal/index";
+import { Data } from "../../../@types/editPhofile";
 
 const url = api + ENDEPOINTS.user;
 

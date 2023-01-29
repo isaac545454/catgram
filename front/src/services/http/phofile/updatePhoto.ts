@@ -1,7 +1,7 @@
 import axios from "axios";
 import { api } from "../../../utils/config";
 import { ENDEPOINTS } from "../../ENDIPOINTS";
-import { PropsReq, createPhofile } from "./typesLocal/index";
+import { createPhofile, PropsReq } from "../../../@types/Phofile";
 
 export const updatePhoto = async (data: PropsReq) => {
   const url = api + ENDEPOINTS.deletePhoto(data.id);

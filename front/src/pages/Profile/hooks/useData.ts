@@ -4,12 +4,12 @@ import { useParams, useNavigate } from "react-router";
 import { AuthContext } from "../../../context";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Schema } from "../yup/index";
 import { newPost } from "../../../services/http/phofile/newPost";
 import { getAllPostUser } from "../../../services/http/phofile/getAllPostUser";
-import { createPhofile } from "../../../services/http/phofile/typesLocal/index";
+import { createPhofile, FormValuesData } from "../../../@types/Phofile";
 import { AxiosError } from "axios";
 import { ROUTES } from "../../../navigation/ROUTES";
 
@@ -23,7 +23,7 @@ export const useData = () => {
     register,
     formState: { errors },
     handleSubmit: handle,
-  } = useForm({ resolver: yupResolver(Schema) });
+  } = useForm<FormValuesData>({ resolver: yupResolver(Schema) });
 
   const { data } = useQuery(["dataPhofile"], () => getUserId(id ? id : ""), {
     onError: (err: Error) => {
@@ -31,29 +31,26 @@ export const useData = () => {
     },
   });
 
-  //
   const { data: dataProfile } = useQuery(["photosUser"], () =>
     getAllPostUser(id ? id : "")
   );
 
-  //
   const { mutate: NewPost } = useMutation<
     createPhofile,
     AxiosError<string>,
     FormData
   >((data) => newPost(data), {
-    onSuccess(res) {
+    onSuccess() {
       toast.success("publicacado com sucesso!");
       client.invalidateQueries(["photosUser"]);
       navigate(ROUTES.home);
     },
-    onError(err) {
+    onError() {
       toast.error("Erro ao carregar");
     },
   });
 
-  //
-  const handleSubmit = (data: any) => {
+  const handleSubmit: SubmitHandler<FormValuesData> = (data) => {
     const form = new FormData();
     form.append("image", data.filePhofile[0]);
     form.append("title", data.title);

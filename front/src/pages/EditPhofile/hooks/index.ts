@@ -4,7 +4,7 @@ import { ChangeEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { updatePhofile } from "../../../services/http/editProfile/updateData";
 import { Data } from "../../../@types/editPhofile";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Schema } from "../yup/index";
 import { UserUploads } from "../../../utils/config";
@@ -24,7 +24,7 @@ export const useData = () => {
     setValue,
     handleSubmit: handle,
     formState: { errors },
-  } = useForm({
+  } = useForm<Data>({
     resolver: yupResolver(Schema),
   });
 
@@ -32,7 +32,7 @@ export const useData = () => {
   const { data: DataProfile } = useQuery(["profile"], GetProfile, {
     onSuccess: (res) => {
       setValue("name", res.name);
-      setValue("bio", res.bio);
+      setValue("bio", res.bio!);
 
       if (res.profileImage) {
         setImage(UserUploads + res.profileImage);
@@ -44,7 +44,7 @@ export const useData = () => {
   });
 
   //
-  const putProfile = useMutation<any, AxiosError<any>, Data>(
+  const putProfile = useMutation<null, AxiosError, Data>(
     (data) => updatePhofile(data),
     {
       onSuccess: () => {
@@ -58,7 +58,7 @@ export const useData = () => {
   );
 
   ///
-  const handleSubmit = (data: any) => {
+  const handleSubmit: SubmitHandler<Data> = (data) => {
     const req: Data = {
       ...data,
       profileImage: file ? file : "",

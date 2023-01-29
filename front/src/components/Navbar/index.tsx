@@ -5,7 +5,6 @@ import {
   BsSearch,
   BsHouseDoorFill,
   BsFillPersonFill,
-  BsFillCameraFill,
   BsCameraFill,
 } from "react-icons/bs";
 import { ROUTES } from "../../navigation/ROUTES";
@@ -23,6 +22,7 @@ export default function Navbar() {
     navigation(ROUTES.search(text));
     setText("");
   };
+
   return (
     <div className="flex justify-between items-center bg-black border-b border-b-[#363636] px-4 py-6">
       <Link to="/" className="font-bold text-2xl">

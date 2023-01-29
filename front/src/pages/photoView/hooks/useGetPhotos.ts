@@ -5,10 +5,10 @@ import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../context";
 import { toast } from "react-toastify";
-import { ResponseLike } from "../../../services/http/photos/typesLocal/index";
+import { ResponseLike } from "../../../@types/photoView";
 import { AxiosError } from "axios";
 import { useState } from "react";
-import { reqComment, resComment } from "../typeLocal";
+import { reqComment, resComment } from "../../../@types/photoView";
 import { putComment } from "../../../services/http/photos/putComment";
 
 export const useGetPhotos = () => {

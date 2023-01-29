@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { getSearch } from "../../../services/http/search/postSearch";
 import { putLike } from "../../../services/http/photos/putLike";
-import { ResponseLike } from "../../../services/http/photos/typesLocal/index";
+import { ResponseLike } from "../../../@types/photoView";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../../context";

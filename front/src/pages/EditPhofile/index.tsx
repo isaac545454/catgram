@@ -3,7 +3,7 @@ import React from "react";
 import { useData } from "./hooks/index";
 import Input from "../../components/Input";
 
-export default function index() {
+export default function EditProfile() {
   const {
     DataProfile,
     handleImage,

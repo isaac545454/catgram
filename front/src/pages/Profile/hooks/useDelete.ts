@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { deletePhotoReq } from "../typesLocal/index";
+import { deletePhotoReq } from "../../../@types/Phofile";
 import { deletePhoto } from "../../../services/http/phofile/deletePhotos";
 
 export const useDelete = () => {

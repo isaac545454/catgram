@@ -1,13 +1,9 @@
-import {
-  QueryClient,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { ChangeEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { updatePhofile } from "../../../services/http/editProfile/updateData";
-import { Data } from "../typesLocal/index";
+import { Data } from "../../../@types/editPhofile";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Schema } from "../yup/index";
@@ -33,7 +29,7 @@ export const useData = () => {
   });
 
   //
-  const { data: DataProfile, isLoading } = useQuery(["profile"], GetProfile, {
+  const { data: DataProfile } = useQuery(["profile"], GetProfile, {
     onSuccess: (res) => {
       setValue("name", res.name);
       setValue("bio", res.bio);
@@ -42,7 +38,7 @@ export const useData = () => {
         setImage(UserUploads + res.profileImage);
       }
     },
-    onError: (err) => {
+    onError: () => {
       toast.error("erro ao carregar os dados");
     },
   });
@@ -51,11 +47,11 @@ export const useData = () => {
   const putProfile = useMutation<any, AxiosError<any>, Data>(
     (data) => updatePhofile(data),
     {
-      onSuccess: (response) => {
+      onSuccess: () => {
         queryClient.invalidateQueries(["profile"]);
         toast.success("perfil atualizado com sucesso!");
       },
-      onError: (error) => {
+      onError: () => {
         toast.error("Ops... houve um erro");
       },
     }

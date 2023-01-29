@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SchemaUpdate } from "../yup/index";
 import { createPhofile } from "../../../services/http/phofile/typesLocal/index";
 import { AxiosError } from "axios";
-import { UpdatePhoto, PropsEdit } from "../typesLocal/index";
+import { UpdatePhoto, PropsEdit } from "../../../@types/Phofile";
 import { updatePhoto } from "../../../services/http/phofile/updatePhoto";
 import { useState } from "react";
 

@@ -1,7 +1,5 @@
 import React, { createContext, ReactNode, useState, useEffect } from "react";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 interface Props {
   children: ReactNode;

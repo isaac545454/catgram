@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ENDEPOINTS } from "../../ENDIPOINTS";
-import { GetPhotos, GetPhotosResponse } from "./typesLocal/index";
+import { GetPhotosResponse } from "../../../@types/photoView";
 import { api } from "../../../utils/config";
 
 export const getPhotos = async (id: string) => {

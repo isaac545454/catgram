@@ -1,5 +1,3 @@
-import { ChangeEvent } from "react";
-
 export type Data = {
   name: string;
   email: string;

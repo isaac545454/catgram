@@ -7,12 +7,8 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   methods: any;
 }
 
-export default function index({
-  methods,
-  validationName,
-  errors,
-  ...res
-}: Props) {
+export default function input(props: Props) {
+  const { methods, validationName, errors, ...res } = props;
   return (
     <>
       <input {...res} {...methods(validationName)} />

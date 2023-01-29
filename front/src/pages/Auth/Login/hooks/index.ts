@@ -8,7 +8,7 @@ import { useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { ROUTES } from "../../../../navigation/ROUTES";
-import { useForm } from "react-hook-form";
+import { FormState, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schema from "../yup/index";
 
@@ -22,7 +22,7 @@ export function useLogin() {
   } = useForm({ resolver: yupResolver(schema) });
 
   //
-  const loginPost = useMutation<LoginRes, AxiosError<any>, LoginReq>(
+  const loginPost = useMutation<LoginRes, AxiosError, LoginReq>(
     (data) => loginHttp(data.email, data.password),
     {
       onSuccess: (response) => {
@@ -32,7 +32,7 @@ export function useLogin() {
         axios.defaults.headers["Authorization"] = `Bearer ${response.token}`;
         navigate(ROUTES.home);
       },
-      onError: (erro) => {
+      onError: () => {
         toast.error("login inválido");
       },
     }
